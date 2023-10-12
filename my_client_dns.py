@@ -129,7 +129,7 @@ def printDNSResponse(data, addr, len_header, len_question):
     print("Header NSCOUNT =", hex(literal_eval(temp)))
     # header ARCOUNT
     temp = hex(int.from_bytes(bytes.fromhex(response_add), "big"))
-    print("Header ARCOUNT =", hex(literal_eval(temp)))
+    print("Header ARCOUNT =", hex(literal_eval(temp)),"\n")
 
 
 
@@ -141,7 +141,7 @@ def printDNSResponse(data, addr, len_header, len_question):
     print("Question QTYPE =", literal_eval(temp))
 
     temp = hex(int.from_bytes(bytes.fromhex(response_qclass), "big"))
-    print("Question QCLASS =", literal_eval(temp))
+    print("Question QCLASS =", literal_eval(temp), "\n")
 
     # print(response_qname, response_qtype, response_qclass)
 
