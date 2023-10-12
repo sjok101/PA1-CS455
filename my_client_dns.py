@@ -11,13 +11,13 @@ def createDNSQuery(url):
     header_add = "0000"
 
 	# a. Create and print the DNS header [15 pts]
-    header = header_id+header_flag+header_question+header_answer+header_auth+header_add
+    header = bytes.fromhex(header_id+header_flag+header_question+header_answer+header_auth+header_add)
 
 	# b. Create and print the Question section [15 pts]
-    question = parseQN(url)+"0001"+"0001"
+    question = bytes.fromhex(parseQN(url)+"0001"+"0001")
 
 	# c. Print the entire query after converting to Hex [15 pts]
-    return bytes.fromhex(header) + bytes.fromhex(question), len(header.hex()), len(question.hex())
+    return header + question, len(header.hex()), len(question.hex())
 
 def parseQN(url):
     temp = url.split('.')
@@ -80,10 +80,10 @@ def printDNSResponse(data, addr, len_header, len_question):
     data = data.hex()
     response_id = data[0:4]
     response_flag = data[4:8]
-    reponse_question = data[8:12]
+    response_question = data[8:12]
     response_answer = data[12:16]
     response_auth = data[16:20]
-    reponse_add = data[20:24]
+    response_add = data[20:24]
 
     response_qname = data[len_header: len_question+len_header-8]
     response_qtype = data[len_question+len_header-8: len_question+len_header-4]
@@ -105,6 +105,31 @@ def printDNSResponse(data, addr, len_header, len_question):
     
     temp = hex(int.from_bytes(bytes.fromhex(response_flag), "big")&0x7800)
     print("Header OPCODE =", hex(literal_eval(temp)>>11))
+
+    # header AA
+    
+    # header TC
+    
+    # header RD
+    
+    # header RA
+    
+    # header Z
+    
+    # header RCODE
+
+    # header QDCOUNT
+    temp = hex(int.from_bytes(bytes.fromhex(response_question), "big"))
+    print("Header QDCOUNT =", hex(literal_eval(temp)))
+    # header ANCOUNT
+    temp = hex(int.from_bytes(bytes.fromhex(response_answer), "big"))
+    print("Header ANCOUNT =", hex(literal_eval(temp)))
+    # header NSCOUNT
+    temp = hex(int.from_bytes(bytes.fromhex(response_auth), "big"))
+    print("Header NSCOUNT =", hex(literal_eval(temp)))
+    # header ARCOUNT
+    temp = hex(int.from_bytes(bytes.fromhex(response_add), "big"))
+    print("Header ARCOUNT =", hex(literal_eval(temp)))
 
 
 
@@ -131,6 +156,9 @@ def printDNSResponse(data, addr, len_header, len_question):
   
     temp = hex(int.from_bytes(bytes.fromhex(answer_rdata), "big"))
     print("Answer RDATA =", temp)
+
+    print(hex(int.from_bytes(bytes.fromhex(data), "big")))
+
     # print(answer)
     # print(answer_rname, answer_rtype, answer_rdata)
 
