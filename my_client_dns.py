@@ -11,16 +11,19 @@ def createDNSQuery(url):
     header_auth = "0000"
     header_add = "0000"
 
+    print("Preparing DNS query ...")
+
 	# a. Create and print the DNS header [15 pts]
     header = bytes.fromhex(header_id+header_flag+header_question+header_answer+header_auth+header_add)
 
-    print("Header is:",header_id+header_flag+header_question+header_answer+header_auth+header_add)
+    print("DNS query header:",header_id+header_flag+header_question+header_answer+header_auth+header_add)
 
 	# b. Create and print the Question section [15 pts]
     question = bytes.fromhex(parseQN(url)+"0001"+"0001")
 
-    print("Question is:", parseQN(url)+"0001"+"0001")
+    print("DNS query question section:", parseQN(url)+"0001"+"0001")
 	# c. Print the entire query after converting to Hex [15 pts]
+    
     return header + question, len(header.hex()), len(question.hex())
 
 def parseQN(url):
@@ -55,6 +58,8 @@ def sendDNSQuery(query):
     port = 53
     udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #UDP connection
     udp_socket.sendto(query, (primary_DNS, port))
+    print("Contacting DNS server ..")
+    print("Sending DNS query ...")
     return udp_socket
 
 def receiveDNSQuery(sock):
@@ -65,7 +70,7 @@ def receiveDNSQuery(sock):
         try:
             data, addr = sock.recvfrom(1024)
             if(len(data)>0):
-                print("DNS Response received (attempt ", count, " of 3)\n")
+                print("DNS Response received (attempt ", count, " of 3)")
                 #print("Received message: %s" % data)
                 break
         except socket.timeout:
@@ -92,7 +97,6 @@ def printDNSResponse(data, addr, len_header, len_question):
     response_qname = data[len_header: len_question+len_header-8]
     response_qtype = data[len_question+len_header-8: len_question+len_header-4]
     response_qclass = data[len_question+len_header-4: len_question+len_header]
-    # print(response_qname)
     
     answer_rname = data[len_question+len_header: len(data)-28]
     answer_rtype = data[len(data)-28: len(data)-24]
@@ -101,19 +105,13 @@ def printDNSResponse(data, addr, len_header, len_question):
     answer_rdlength = data[len(data)-12: len(data)-8]
     answer_rdata = data[len(data)-8: len(data)]
 
-
-
-    answer = data[len_question+len_header: len(data)]
-    
-
-    print("\n-- Processing DNS response --\n")
+    print("\n-- DNS response --\n")
     # print(response_id, response_flag, reponse_question, response_answer, response_auth, reponse_add)
     print("Header ID =", response_id)
     # header qr
     temp = hex(int.from_bytes(bytes.fromhex(response_flag), "big"))
     print("Header QR =", hex((literal_eval(temp))>>15)) # just shift 15 bits to the right
 
-    
     # header opcode
     print("Header OPCODE =", hex((literal_eval(temp)&0x7800)>>11)) # use and operator with 0111 1000 0000 0000
     
@@ -135,7 +133,6 @@ def printDNSResponse(data, addr, len_header, len_question):
     # header RCODE
     print("Header RCODE =", hex((literal_eval(temp)&0x000f)), "\n") # and with 0000 0000 0000 1111 just shift 4 bits to the right         
     
-    
     # header QDCOUNT
     temp = hex(int.from_bytes(bytes.fromhex(response_question), "big"))
     print("Header QDCOUNT =", hex(literal_eval(temp)))
@@ -149,9 +146,6 @@ def printDNSResponse(data, addr, len_header, len_question):
     temp = hex(int.from_bytes(bytes.fromhex(response_add), "big"))
     print("Header ARCOUNT =", hex(literal_eval(temp)),"\n")
 
-
-
-
     temp = hex(int.from_bytes(bytes.fromhex(response_qname), "big"))
     print("Question QNAME =", temp)
 
@@ -160,9 +154,6 @@ def printDNSResponse(data, addr, len_header, len_question):
 
     temp = hex(int.from_bytes(bytes.fromhex(response_qclass), "big"))
     print("Question QCLASS =", literal_eval(temp), "\n")
-
-    # print(response_qname, response_qtype, response_qclass)
-
 
     # answer CLASS
     temp = hex(int.from_bytes(bytes.fromhex(answer_class), "big"))
@@ -186,34 +177,33 @@ def printDNSResponse(data, addr, len_header, len_question):
   
     # answer RDATA
     temp = hex(int.from_bytes(bytes.fromhex(answer_rdata), "big"))
-    print("Answer RDATA =", temp)
+    
 
-    #print ip
+    # ip
     ipsplit = re.findall('..', temp[2:])
     ipstr = ""
     for i in ipsplit:
         i = str(int(i, 16))
         ipstr += i + "."
     ipstr = ipstr[:-1]
-    print("IP = " + ipstr)
+    print("Answer RDATA =", ipstr)
       
     return 1
 
 def main(url):
-
     # a. Create socket [5 pts]
 	# b. Send the DNS query [5 pts]
 	# c. Receive the DNS response [5 pts]
 	# d. Close the socket [5 pts]
 
     query, len_header, len_question = createDNSQuery(url)
-    print("Sending: ",query, "\n")
+    print("Complete DNS query = ", query, "\n")
 
     udp_sock = sendDNSQuery(query)
     data, addr = receiveDNSQuery(udp_sock)
     udp_sock.close()
-    print("Data is: ",  data)
-    print("Addr is: ", addr)
+    print("Processing DNS response ...")
+    print("-------------------------------------------------------")
     printDNSResponse(data, addr, len_header, len_question)
     return 1
 
