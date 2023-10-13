@@ -14,9 +14,12 @@ def createDNSQuery(url):
 	# a. Create and print the DNS header [15 pts]
     header = bytes.fromhex(header_id+header_flag+header_question+header_answer+header_auth+header_add)
 
+    print("Header is:",header_id+header_flag+header_question+header_answer+header_auth+header_add)
+
 	# b. Create and print the Question section [15 pts]
     question = bytes.fromhex(parseQN(url)+"0001"+"0001")
 
+    print("Question is:", parseQN(url)+"0001"+"0001")
 	# c. Print the entire query after converting to Hex [15 pts]
     return header + question, len(header.hex()), len(question.hex())
 
@@ -77,7 +80,7 @@ def receiveDNSQuery(sock):
 def printDNSResponse(data, addr, len_header, len_question):
     # a. Parse and print the response header [15 pts]
 	# b. Print the resolved IP address [15 pts]
-    print(len(data.hex()), len_header, len_question)
+    
     data = data.hex()
     response_id = data[0:4]
     response_flag = data[4:8]
@@ -106,25 +109,33 @@ def printDNSResponse(data, addr, len_header, len_question):
     print("\n-- Processing DNS response --\n")
     # print(response_id, response_flag, reponse_question, response_answer, response_auth, reponse_add)
     print("Header ID =", response_id)
-    
-    temp = hex(int.from_bytes(bytes.fromhex(response_flag), "big")&0x8000)
-    print("Header QR =", literal_eval(hex(literal_eval(temp)>>15)))
-    
-    temp = hex(int.from_bytes(bytes.fromhex(response_flag), "big")&0x7800)
-    print("Header OPCODE =", hex(literal_eval(temp)>>11))
+    # header qr
+    temp = hex(int.from_bytes(bytes.fromhex(response_flag), "big"))
+    print("Header QR =", hex((literal_eval(temp))>>15)) # just shift 15 bits to the right
 
+    
+    # header opcode
+    print("Header OPCODE =", hex((literal_eval(temp)&0x7800)>>11)) # use and operator with 0111 1000 0000 0000
+    
     # header AA
-    
-    # header TC
-    
-    # header RD
-    
-    # header RA
-    
-    # header Z
-    
-    # header RCODE
+    print("Header AA =", hex((literal_eval(temp)&0x0400)>>10)) # and with 0000 0100 0000 0000 just shift 10 bits to the right 
 
+    # header TC
+    print("Header TC =", hex((literal_eval(temp)&0x0200)>>9)) # and with 0000 0010 0000 0000 just shift 9 bits to the right 
+
+    # header RD
+    print("Header RD =", hex((literal_eval(temp)&0x0100)>>8)) # and with 0000 0001 0000 0000 just shift 8 bits to the right     
+
+    # header RA
+    print("Header RA =", hex((literal_eval(temp)&0x0080)>>7)) # and with 0000 0000 1000 0000 just shift 7 bits to the right         
+
+    # header Z
+    print("Header Z =", hex((literal_eval(temp)&0x0070)>>4)) # and with 0000 0000 0111 0000 just shift 4 bits to the right     
+
+    # header RCODE
+    print("Header RCODE =", hex((literal_eval(temp)&0x000f)), "\n") # and with 0000 0000 0000 1111 just shift 4 bits to the right         
+    
+    
     # header QDCOUNT
     temp = hex(int.from_bytes(bytes.fromhex(response_question), "big"))
     print("Header QDCOUNT =", hex(literal_eval(temp)))
@@ -196,7 +207,7 @@ def main(url):
 	# d. Close the socket [5 pts]
 
     query, len_header, len_question = createDNSQuery(url)
-    print("Sending: ",query)
+    print("Sending: ",query, "\n")
 
     udp_sock = sendDNSQuery(query)
     data, addr = receiveDNSQuery(udp_sock)
