@@ -146,37 +146,25 @@ def printDNSResponse(data, addr, len_header, len_question):
     # print(response_qname, response_qtype, response_qclass)
 
 
+    # answer CLASS
+    # answer TTL
+    # answer RDLENGTH
 
-
+    # answer NAME
     temp = hex(int.from_bytes(bytes.fromhex(answer_rname), "big"))
     print("Answer RNAME =", temp)
 
+    # answer TYPE
     temp = hex(int.from_bytes(bytes.fromhex(answer_rtype), "big"))
     print("Answer RTYPE =", temp)
   
+    # answer RDATA
     temp = hex(int.from_bytes(bytes.fromhex(answer_rdata), "big"))
     print("Answer RDATA =", temp)
 
     print(hex(int.from_bytes(bytes.fromhex(data), "big")))
 
-    # print(answer)
-    # print(answer_rname, answer_rtype, answer_rdata)
-
-
-    
-        
-    # print("Response ID =", response_id)
-    # print("Response ID =", response_id)
-    # print("Response ID =", response_id)
-
-
-    # if literal_eval(temp)>0:
-    #     print("Response QR = 1")
-    # else:
-    #     print("Response QR = 0")
-    # temp = hex(int.from_bytes(bytes.fromhex(response_flag), "big")&0x7800)
-    # if literal_eval(temp)>0:
-    
+      
     return 1
 
 def main(url):
