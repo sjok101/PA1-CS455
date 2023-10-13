@@ -1,6 +1,7 @@
 import random
 import sys
 import socket
+import re
 from ast import literal_eval
 def createDNSQuery(url):
     header_id = getID()
@@ -89,9 +90,15 @@ def printDNSResponse(data, addr, len_header, len_question):
     response_qtype = data[len_question+len_header-8: len_question+len_header-4]
     response_qclass = data[len_question+len_header-4: len_question+len_header]
     # print(response_qname)
+    
+    answer_rname = data[len_question+len_header: len(data)-28]
+    answer_rtype = data[len(data)-28: len(data)-24]
+    answer_class = data[len(data)-24: len(data)-20]
+    answer_ttl = data[len(data)-20: len(data)-12]
+    answer_rdlength = data[len(data)-12: len(data)-8]
     answer_rdata = data[len(data)-8: len(data)]
-    answer_rname = data[len_question+len_header: len(data)-24]
-    answer_rtype = data[len(data)-24: len(data)-22]
+
+
 
     answer = data[len_question+len_header: len(data)]
     
@@ -147,8 +154,16 @@ def printDNSResponse(data, addr, len_header, len_question):
 
 
     # answer CLASS
+    temp = hex(int.from_bytes(bytes.fromhex(answer_class), "big"))
+    print("Answer CLASS =", temp)
+
     # answer TTL
+    temp = hex(int.from_bytes(bytes.fromhex(answer_ttl), "big"))
+    print("Answer TTL =", temp)
+
     # answer RDLENGTH
+    temp = hex(int.from_bytes(bytes.fromhex(answer_rdlength), "big"))
+    print("Answer RDLENGTH =", temp)
 
     # answer NAME
     temp = hex(int.from_bytes(bytes.fromhex(answer_rname), "big"))
@@ -162,8 +177,14 @@ def printDNSResponse(data, addr, len_header, len_question):
     temp = hex(int.from_bytes(bytes.fromhex(answer_rdata), "big"))
     print("Answer RDATA =", temp)
 
-    print(hex(int.from_bytes(bytes.fromhex(data), "big")))
-
+    #print ip
+    ipsplit = re.findall('..', temp[2:])
+    ipstr = ""
+    for i in ipsplit:
+        i = str(int(i, 16))
+        ipstr += i + "."
+    ipstr = ipstr[:-1]
+    print("IP = " + ipstr)
       
     return 1
 
