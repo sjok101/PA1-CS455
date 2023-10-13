@@ -154,6 +154,14 @@ def printDNSResponse(data, addr, len_header, len_question):
     temp = hex(int.from_bytes(bytes.fromhex(response_qclass), "big"))
     print("Question QCLASS =", literal_eval(temp), "\n")
 
+    # answer NAME
+    temp = hex(int.from_bytes(bytes.fromhex(answer_rname), "big"))
+    print("Answer RNAME =", temp)
+
+    # answer TYPE
+    temp = hex(int.from_bytes(bytes.fromhex(answer_rtype), "big"))
+    print("Answer RTYPE =", temp)
+
     # answer CLASS
     temp = hex(int.from_bytes(bytes.fromhex(answer_class), "big"))
     print("Answer CLASS =", temp)
@@ -166,14 +174,6 @@ def printDNSResponse(data, addr, len_header, len_question):
     temp = hex(int.from_bytes(bytes.fromhex(answer_rdlength), "big"))
     print("Answer RDLENGTH =", temp)
 
-    # answer NAME
-    temp = hex(int.from_bytes(bytes.fromhex(answer_rname), "big"))
-    print("Answer RNAME =", temp)
-
-    # answer TYPE
-    temp = hex(int.from_bytes(bytes.fromhex(answer_rtype), "big"))
-    print("Answer RTYPE =", temp)
-  
     # answer RDATA
     temp = hex(int.from_bytes(bytes.fromhex(answer_rdata), "big"))
     
