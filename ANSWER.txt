@@ -1,0 +1,214 @@
+-------------------------------------------------------
+www.cnn.com
+-------------------------------------------------------
+
+Preparing DNS query ...
+DNS query header: 2c5e01000001000000000000
+DNS query question section: 0377777703636e6e03636f6d0000010001
+Complete DNS query =  b',^\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03www\x03cnn\x03com\x00\x00\x01\x00\x01'
+
+Contacting DNS server ..
+Sending DNS query ...
+DNS Response received (attempt  1  of 3)
+Processing DNS response ...
+-------------------------------------------------------
+
+-- DNS response --
+
+Header ID = 2c5e
+Header QR = 0x1
+Header OPCODE = 0x0
+Header AA = 0x0
+Header TC = 0x0
+Header RD = 0x1
+Header RA = 0x1
+Header Z = 0x0
+Header RCODE = 0x0
+
+Header QDCOUNT = 0x1
+Header ANCOUNT = 0x5
+Header NSCOUNT = 0x0
+Header ARCOUNT = 0x0
+
+Question QNAME = 0x377777703636e6e03636f6d00
+Question QTYPE = 1
+Question QCLASS = 1
+
+Answer CLASS = 0x1
+Answer TTL = 0xc
+Answer RDLENGTH = 0x4
+Answer RNAME = 0xc00c0005000100000112001807636e6e2d746c73036d617006666173746c79036e657400c029000100010000000c000497650305c029000100010000000c000497654305c029000100010000000c000497658305c029
+Answer RTYPE = 0x1
+Answer RDATA = 151.101.195.5
+
+-------------------------------------------------------
+www.gmu.edu
+-------------------------------------------------------
+
+Preparing DNS query ...
+DNS query header: facf01000001000000000000
+DNS query question section: 0377777703676d75036564750000010001
+Complete DNS query =  b'\xfa\xcf\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03www\x03gmu\x03edu\x00\x00\x01\x00\x01'
+
+Contacting DNS server ..
+Sending DNS query ...
+DNS Response received (attempt  1  of 3)
+Processing DNS response ...
+-------------------------------------------------------
+
+-- DNS response --
+
+Header ID = facf
+Header QR = 0x1
+Header OPCODE = 0x0
+Header AA = 0x0
+Header TC = 0x0
+Header RD = 0x1
+Header RA = 0x1
+Header Z = 0x0
+Header RCODE = 0x0
+
+Header QDCOUNT = 0x1
+Header ANCOUNT = 0x1
+Header NSCOUNT = 0x0
+Header ARCOUNT = 0x0
+
+Question QNAME = 0x377777703676d750365647500
+Question QTYPE = 1
+Question QCLASS = 1
+
+Answer CLASS = 0x1
+Answer TTL = 0x5aa
+Answer RDLENGTH = 0x4
+Answer RNAME = 0xc00c
+Answer RTYPE = 0x1
+Answer RDATA = 192.124.249.68
+
+-------------------------------------------------------
+www.vt.edu
+-------------------------------------------------------
+
+Preparing DNS query ...
+DNS query header: 5edb01000001000000000000
+DNS query question section: 03777777027674036564750000010001
+Complete DNS query =  b'^\xdb\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03www\x02vt\x03edu\x00\x00\x01\x00\x01'
+
+Contacting DNS server ..
+Sending DNS query ...
+DNS Response received (attempt  1  of 3)
+Processing DNS response ...
+-------------------------------------------------------
+
+-- DNS response --
+
+Header ID = 5edb
+Header QR = 0x1
+Header OPCODE = 0x0
+Header AA = 0x0
+Header TC = 0x0
+Header RD = 0x1
+Header RA = 0x1
+Header Z = 0x0
+Header RCODE = 0x0
+
+Header QDCOUNT = 0x1
+Header ANCOUNT = 0x5
+Header NSCOUNT = 0x0
+Header ARCOUNT = 0x0
+
+Question QNAME = 0x37777770276740365647500
+Question QTYPE = 1
+Question QCLASS = 1
+
+Answer CLASS = 0x1
+Answer TTL = 0x3c
+Answer RDLENGTH = 0x4
+Answer RNAME = 0xc00c00050001000001b8001f0e64317871333166627234776f6d750a636c6f756466726f6e74036e657400c028000100010000003c00040d209745c028000100010000003c00040d209746c028000100010000003c00040d209768c028
+Answer RTYPE = 0x1
+Answer RDATA = 210.9.112
+
+-------------------------------------------------------
+www.youtube.com
+-------------------------------------------------------
+
+Preparing DNS query ...
+DNS query header: 4d3301000001000000000000
+DNS query question section: 0377777707796f757475626503636f6d0000010001
+Complete DNS query =  b'M3\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03www\x07youtube\x03com\x00\x00\x01\x00\x01'
+
+Contacting DNS server ..
+Sending DNS query ...
+DNS Response received (attempt  1  of 3)
+Processing DNS response ...
+-------------------------------------------------------
+
+-- DNS response --
+
+Header ID = 4d33
+Header QR = 0x1
+Header OPCODE = 0x0
+Header AA = 0x0
+Header TC = 0x0
+Header RD = 0x1
+Header RA = 0x1
+Header Z = 0x0
+Header RCODE = 0x0
+
+Header QDCOUNT = 0x1
+Header ANCOUNT = 0x11
+Header NSCOUNT = 0x0
+Header ARCOUNT = 0x0
+
+Question QNAME = 0x377777707796f757475626503636f6d00
+Question QTYPE = 1
+Question QCLASS = 1
+
+Answer CLASS = 0x1
+Answer TTL = 0x12c
+Answer RDLENGTH = 0x4
+Answer RNAME = 0xc00c000500010000012c00160a796f75747562652d7569016c06676f6f676c65c018c02d000100010000012c0004acfd3e5dc02d000100010000012c0004acfd3e88c02d000100010000012c0004acfd3e5bc02d000100010000012c0004acfd3ebec02d000100010000012c0004acfd73bec02d000100010000012c0004acfd735bc02d000100010000012c0004acfd735dc02d000100010000012c0004acfd7388c02d000100010000012c0004acfd7a5dc02d000100010000012c0004acfd7a5bc02d000100010000012c0004acfd7a88c02d000100010000012c0004acfd7abec02d000100010000012c0004acfd3f5bc02d000100010000012c0004acfd3f5dc02d000100010000012c0004acfd3fbec02d
+Answer RTYPE = 0x1
+Answer RDATA = 172.253.63.136
+
+-------------------------------------------------------
+www.eample.com
+-------------------------------------------------------
+
+Preparing DNS query ...
+DNS query header: 203f01000001000000000000
+DNS query question section: 03777777076578616d706c6503636f6d0000010001
+Complete DNS query =  b' ?\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x03www\x07example\x03com\x00\x00\x01\x00\x01'
+
+Contacting DNS server ..
+Sending DNS query ...
+DNS Response received (attempt  1  of 3)
+Processing DNS response ...
+-------------------------------------------------------
+
+-- DNS response --
+
+Header ID = 203f
+Header QR = 0x1
+Header OPCODE = 0x0
+Header AA = 0x0
+Header TC = 0x0
+Header RD = 0x1
+Header RA = 0x1
+Header Z = 0x0
+Header RCODE = 0x0
+
+Header QDCOUNT = 0x1
+Header ANCOUNT = 0x1
+Header NSCOUNT = 0x0
+Header ARCOUNT = 0x0
+
+Question QNAME = 0x3777777076578616d706c6503636f6d00
+Question QTYPE = 1
+Question QCLASS = 1
+
+Answer CLASS = 0x1
+Answer TTL = 0x1b21
+Answer RDLENGTH = 0x4
+Answer RNAME = 0xc00c
+Answer RTYPE = 0x1
+Answer RDATA = 93.184.216.34

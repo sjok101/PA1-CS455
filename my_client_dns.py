@@ -11,7 +11,7 @@ def createDNSQuery(url):
     header_auth = "0000"
     header_add = "0000"
 
-    print("Preparing DNS query ...")
+    print("\nPreparing DNS query ...")
 
 	# a. Create and print the DNS header [15 pts]
     header = bytes.fromhex(header_id+header_flag+header_question+header_answer+header_auth+header_add)
@@ -49,7 +49,6 @@ def getID():
     ret = ret.replace(ret[:2], '')
     if(len(ret)==3):
         ret= "0"+ret
-    print(ret)
     return(ret)
 
 
